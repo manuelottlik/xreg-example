@@ -1,0 +1,124 @@
+{
+  "specversion": "0.5",
+  "endpoints": {
+    "com.example.nats": {
+      "name": "nats",
+      "description": "NATS endpoint of Example Company",
+      "usage": "producer",
+      "envelope": "CloudEvents/1.0",
+      "envelopeoptions": {
+        "mode": "binary",
+        "format": "application/json"
+      },
+      "protocol": "HTTP/1.1",
+      "protocoloptions": {
+        "endpoints": [
+          {
+            "url": "http://nats.example.com"
+          }
+        ]
+      }
+    }
+  },
+  "messagegroups": {
+    "com.example.todolist": {
+      "name": "todolist",
+      "description": "Messages of Todolist service for Example Company",
+      "messages": {
+        "com.example.todolist.task.created.v1": {
+          "name": "Task created",
+          "description": "Event that is emitted when a task was created",
+          "envelope": "CloudEvents/1.0",
+          "datacontenttype": "application/json",
+          "dataschemauri": "/schemagroups/com.example.todolist/schemas/com.example.todolist.task.v1",
+          "versions": {
+            "v1.0.0": {
+              "envelope": "CloudEvents/1.0",
+              "envelopemetadata": {
+                "specversion": {
+                  "type": "string",
+                  "value": "1.0"
+                },
+                "type": {
+                  "type": "string",
+                  "value": "com.example.todolist.task.created.v1"
+                },
+                "source": {
+                  "type": "string",
+                  "value": "https://api.example.com/todolist/tasks"
+                }
+              },
+              "dataschemaformat": "JsonSchema/draft-07",
+              "dataschemauri": "/schemagroups/com.example.todolist/schemas/com.example.todolist.task.v1/versions/v1.0.0"
+            }
+          }
+        },
+        "com.example.todolist.task.completed.v1": {
+          "name": "Task completed",
+          "description": "Event that is emitted when a task was completed",
+          "envelope": "CloudEvents/1.0",
+          "dataschemaformat": "JsonSchema/draft-07",
+          "dataschemauri": "/schemagroups/com.example.todolist/schemas/com.example.todolist.task.v1",
+          "versions": {
+            "v1.0.0": {
+              "envelope": "CloudEvents/1.0",
+              "envelopemetadata": {
+                "specversion": {
+                  "type": "string",
+                  "value": "1.0"
+                },
+                "type": {
+                  "type": "string",
+                  "value": "com.example.todolist.task.completed.v1"
+                },
+                "source": {
+                  "type": "string",
+                  "value": "https://api.example.com/todolist/tasks"
+                }
+              },
+              "dataschemaformat": "JsonSchema/draft-07",
+              "dataschemauri": "/schemagroups/com.example.todolist/schemas/com.example.todolist.task.v1/versions/v1.0.0"
+            }
+          }
+        }
+      }
+    }
+  },
+  "schemagroups": {
+    "com.example.todolist": {
+      "name": "todolist",
+      "description": "Schemas of Todolist service for Example Company",
+      "schemas": {
+        "com.example.todolist.task.v1": {
+          "name": "Task",
+          "description": "The Task entity",
+          "versions": {
+            "v1.0.0": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "20485f1f-65d5-405c-a2c4-215bf1a19533"
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "Rate this talk"
+                  },
+                  "completed": {
+                    "type": "boolean",
+                    "example": false
+                  }
+                },
+                "additionalProperties": false,
+                "required": ["id", "title", "completed"]
+              },
+              "format": "JsonSchema/draft-07"
+            }
+          }
+        }
+      }
+    }
+  }
+}
