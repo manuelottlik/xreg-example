@@ -14,7 +14,7 @@
       "protocoloptions": {
         "endpoints": [
           {
-            "url": "http://nats.example.com"
+            "uri": "http://nats.example.com"
           }
         ]
       }
