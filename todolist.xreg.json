@@ -10,13 +10,14 @@
         "mode": "binary",
         "format": "application/json"
       },
-      "protocol": "HTTP/1.1",
+      "protocol": "NATS/1.0.0",
       "protocoloptions": {
         "endpoints": [
           {
-            "uri": "http://nats.example.com"
+            "uri": "nats://nats.example.com:4222"
           }
-        ]
+        ],
+        "subject": "com.example.{service}.{entity}.{verb}"
       }
     }
   },
@@ -26,13 +27,10 @@
       "description": "Messages of Todolist service for Example Company",
       "messages": {
         "com.example.todolist.task.created.v1": {
-          "name": "Task created",
-          "description": "Event that is emitted when a task was created",
-          "envelope": "CloudEvents/1.0",
-          "datacontenttype": "application/json",
-          "dataschemauri": "/schemagroups/com.example.todolist/schemas/com.example.todolist.task.v1",
           "versions": {
             "v1.0.0": {
+              "name": "Task created",
+              "description": "Event that is emitted when a task was created",
               "envelope": "CloudEvents/1.0",
               "envelopemetadata": {
                 "specversion": {
@@ -48,19 +46,20 @@
                   "value": "https://api.example.com/todolist/tasks"
                 }
               },
+              "datacontenttype": "application/json",
               "dataschemaformat": "JsonSchema/draft-07",
               "dataschemauri": "/schemagroups/com.example.todolist/schemas/com.example.todolist.task.v1/versions/v1.0.0"
             }
           }
         },
         "com.example.todolist.task.completed.v1": {
-          "name": "Task completed",
-          "description": "Event that is emitted when a task was completed",
           "envelope": "CloudEvents/1.0",
           "dataschemaformat": "JsonSchema/draft-07",
           "dataschemauri": "/schemagroups/com.example.todolist/schemas/com.example.todolist.task.v1",
           "versions": {
             "v1.0.0": {
+              "name": "Task completed",
+              "description": "Event that is emitted when a task was completed",
               "envelope": "CloudEvents/1.0",
               "envelopemetadata": {
                 "specversion": {
@@ -76,6 +75,7 @@
                   "value": "https://api.example.com/todolist/tasks"
                 }
               },
+              "datacontenttype": "application/json",
               "dataschemaformat": "JsonSchema/draft-07",
               "dataschemauri": "/schemagroups/com.example.todolist/schemas/com.example.todolist.task.v1/versions/v1.0.0"
             }
@@ -90,10 +90,10 @@
       "description": "Schemas of Todolist service for Example Company",
       "schemas": {
         "com.example.todolist.task.v1": {
-          "name": "Task",
-          "description": "The Task entity",
           "versions": {
             "v1.0.0": {
+              "name": "Task",
+              "description": "The Task entity",
               "schema": {
                 "type": "object",
                 "properties": {
@@ -122,3 +122,4 @@
     }
   }
 }
+

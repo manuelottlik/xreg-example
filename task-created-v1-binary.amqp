@@ -1,0 +1,26 @@
+------------------------- properties -----------------------------
+to: myqueue
+content-type: application/json; charset=utf-8
+
+------------------- application-properties -----------------------
+cloudEvents:specversion: 1.0
+cloudEvents:id: 20485f1f-65d5-405c-a2c4-215bf1a19533
+cloudEvents:type: com.example.todolist.task.created.v1
+cloudEvents:source: https://api.example.com/todolist/tasks
+cloudEvents:subject: 604f5d76-5244-41ba-9f19-bac1c923cee8
+cloudEvents:time: 2024-08-05T17:31:00Z
+cloudEvents:datacontenttype: application/json
+cloudEvents:dataschema: https://xreg.example.com/schemagroups/com.example.todolist/schemas/com.example.todolist.task.v1
+
+---------------------- application-data --------------------------
+{
+  "id": "604f5d76-5244-41ba-9f19-bac1c923cee8",
+  "label": "Drink beer at KubeBrawl",
+  "completed": false
+}
+
+
+
+
+
+
